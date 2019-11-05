@@ -33,7 +33,7 @@ void setup() {
 }
 
 void readPotValues(){
-  // function that reads the potentiometers input
+  // function that reads the potentiometers' input
   readPotValueRed =analogRead(potPinRed);
   readPotValueGreen = analogRead(potPinGreen);
   readPotValueBlue = analogRead(potPinBlue);
@@ -53,7 +53,6 @@ void writeValues(){
 }
 
 void loop() {
-  
 readPotValues();
 mapValues();
 writeValues();
