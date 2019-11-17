@@ -1,1 +1,1 @@
-AAAAAA
+Circuit made of a 4-digit 7-segment display, each digit of the segment being individually controlled with the joystick. Using the X-axis, you can cycle the digits and chose which one to modify. After that, using the Y-axis, you can modify the value of the digit, both up and down.
