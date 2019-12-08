@@ -16,7 +16,7 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 **Game specifications**
 
 1. Score - The player's score increments with every hit he makes, multiplied by the level coefficient
-1. Difficulty - Each game begins with a difficulty value set by the player before starting. Then, the difficulty increases as the player levels up (every 10 seconds) and the speed of the ball increases, too. When the player reaches level 5, new obstacles will appear on the screen and when the ball hits it, it will with bounce back, making it harder for the player.
+1. Difficulty - Each game begins with a difficulty value set by the player before starting. Then, the difficulty increases as the player levels up (every 10 seconds) and the speed of the ball increases, too. When the player reaches level 5, new obstacles will appear on the screen and when the ball hits them, it will with bounce back, making it harder for the player.
 1. During the game, the LCD will display 3 major info:
    1. Score
    1. Lives
