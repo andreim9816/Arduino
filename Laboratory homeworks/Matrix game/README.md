@@ -4,6 +4,8 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 
 **Hardware**
 
+1. Arduino Uno
+1. 2x Breadboard
 1. 8x8 Led matrix
 1. LCD
 1. Joystick
