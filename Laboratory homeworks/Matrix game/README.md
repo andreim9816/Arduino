@@ -7,6 +7,8 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 1. 8x8 Led matrix
 1. LCD
 1. Joystick
+1. Wires
+1. Potentiometer
 1. MAX7219 Driver
 1. Buzzer
 1. 2x Leds ( red and greed)
@@ -25,6 +27,8 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 1. More lives - At random moments of time during the game, a blinking dot will appear on the screen. If the player hits it before the AI does it and while it still appears on the screen( the dot will be avaiable for a short time - 4 seconds), the number of lives increments by 1.
 1. Finishing the game - when the player has no more lives, the game is finished.
 1. Highscore - Everytime the game is finshed, if the score is bigger than the current highscore, the player's name and his score will be stored in the EEPROM
+
+
 
 **LCD Menu**
 
