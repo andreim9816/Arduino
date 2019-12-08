@@ -6,7 +6,7 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 
 1. 8x8 Led matrix
 1. LCD
-1. 2x Joystick
+1. Joystick
 1. MAX7219 Driver
 1. Buzzer
 1. 2x Leds ( red and greed)
