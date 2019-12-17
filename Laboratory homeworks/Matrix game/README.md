@@ -15,6 +15,8 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 1. Buzzer
 1. 2x Leds ( red and greed)
 
+**Photo with the whole circuit **
+![Photo of the circuit](Photo.jpeg)
 
 
 **Game specifications**
