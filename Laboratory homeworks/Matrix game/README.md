@@ -22,16 +22,14 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 
 
 <br>
+<br>
 
 **Video that shows how to play**
 [Click here](https://www.youtube.com/watch?v=V0qGdA2r3cE&list=UUUBpYqSzkafnUoxYm9WSbDg)
 
 
 <br>
-
-
-
-
+<br>
 
 **HOW TO PLAY**
 
