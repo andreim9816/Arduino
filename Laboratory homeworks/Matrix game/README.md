@@ -53,11 +53,11 @@ As long as you the round is not over, you can move your paddle by moving the joy
 
 When the ball reaches the second line on the matrix, you have to hit the ball so you don't lose the round. If you managed to hit it, the green led lights up
 
-##### Difficulty #####
+#### Difficulty #####
 
 The game's difficulty increases as long as you play. As you reached certain levels (5, 10, 13 or 16), the ball's speed increases, the level increments faster, but also the paddle will be moved faster, too.
 
-##### Extra lives ####
+#### Extra lives ####
 
 At random moments of time (but after level 6, 10 or 14) maximum 3 "extra lives" will be displayed on the matrix, one at each time. From the time it appears on the screen, you have 4 seconds (until it vanishes) to hit it with the ball. If you succeed, the number of lives increases by one. Otherwise, nothing happens.
 
