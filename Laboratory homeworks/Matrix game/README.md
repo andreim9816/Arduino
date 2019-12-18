@@ -14,7 +14,7 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 1. MAX7219 Driver
 1. Buzzer
 1. 3x Resistors
-1. 2x Leds ( red and greed)
+1. 2x Leds ( red and green)
 
 **Photo with the whole circuit**
 
@@ -25,7 +25,7 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 <br>
 
 **Video that shows how to play**
-[Click here](https://www.youtube.com/watch?v=V0qGdA2r3cE&list=UUUBpYqSzkafnUoxYm9WSbDg)
+[click here](https://www.youtube.com/watch?v=V0qGdA2r3cE&list=UUUBpYqSzkafnUoxYm9WSbDg)
 
 
 <br>
@@ -42,7 +42,7 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
    
 #### Start Game ####
 
-When choosing the "Start Game" option, your game has just begun. The paddles and the ball will be displayed on the 8x8 matrix, with the paddle you are in control on the bottom of it. The level you started is the one you had set up in the "Settings" Menu (otherwise the default value is 1) and also the name you had set up, too ( maximum of 11 characters allowed). The goal of the game is to hit the ball as many times as possible, as your score gets incremented by the current level value everytime the ball hits your paddle. During the game, relevant info is displayed on the LCD (score, number of lives and the current level).
+When choosing the "Start Game" option, your game has just begun. The paddles and the ball will be displayed on the 8x8 matrix, with the paddle you are in control on the bottom of it. The level you started is the one you had set up in the "Settings" Menu (otherwise, the default value is 1) and also the name you had set up, too ( maximum of 11 characters allowed). The goal of the game is to hit the ball as many times as possible, as your score gets incremented by the current level value everytime the ball hits your paddle. During the game, relevant info is displayed on the LCD (score, number of lives and the current level).
 
 #### Moving the paddle ####
 
@@ -50,7 +50,7 @@ As long as you the round is not over, you can move your paddle by moving the joy
 
 #### Hitting the ball ####
 
-When the ball reaches the second line on the matrix, you have to hit the ball so you don't lose the round. If you managed to hit it, the green led lights up
+When the ball reaches the second line on the matrix, you have to hit the ball so you don't lose the round. If you managed to hit it, the green led lights up, and your score is being updated (incremented by the level value).
 
 #### Difficulty ####
 
@@ -66,15 +66,15 @@ If you failed to hit the ball and it reaches the paddle's line, you lost one lif
 
 #### Losing the game ####
 
-If you ran out of lives, the game is over. A message with "GAME OVER" will be displayed on the matrix. If you made a highscore, a "Congratulations, you made a new highscore" message will be displayed on the LCD. After 5 seconds, another message appears asking if you want to exit to the Main Menu, or you want to try again, with the same name and starting level you set up. Otherwise, if you didn't make a new highscore, a "Congratulaions, you made xxxx points" message will be displayed on the LCD. After 5 seconds, another message appears asking if you want to exit or to try again.
+If you ran out of lives, the game is over. A message with "GAME OVER" will be displayed on the matrix. If you made a highscore, a "Congratulations, you made a new highscore" message will be displayed on the LCD. You need to press the joystick button so another message appears asking if you want to exit to the Main Menu, or you want to try again, with the same name and starting level you set up. Otherwise, if you didn't make a new highscore, a "Congratulaions, you made xxxx points" message will be displayed on the LCD. After pressing the joystick button (just like the other case), another message appears asking if you want to exit or to try again.
 
 #### Highscore ####
 
-In this category, it will be displayed on the LCD the highscore, along with the player's name who made it. To exit, you need to press the joystick button
+In this category, it will be displayed, on the LCD, the highscore, along with the player's name who made it. To exit, you need to press the joystick button.
 
 #### Settings ####
 
-In this category, you can set up the starting level of the game, along with the name. If you don't set up any of them, your game will start with the default values ( level : 1 and name : "AAAAAAAAAAA").  To change the level, you need your cursor to be placed on the "Level" option, to click the joystick, and then increment or decrement it by moving on the OY axis (vertically). When you finish, you need to click again the joystick. To change the player's name, you need to select the "Name" option by clicking on it, to set up every letter (by moving on the OY axis) and to move from one to another, you need to move the joystick on the OX axis (horizontally). After you finished, you have to click the joystick button. To exit, you need to press the joytstick button on the "Exit" option.
+In this category, you can set up the starting level of the game, along with the name. If you don't set up any of them, your game will start with the default values ( level : 1 and name : "AAAAAAAAAAA").  To change the level, you need your cursor to be placed on the "Level" option, to click the joystick, and then increment or decrement it by moving on the OY axis (vertically). When you finish, you need to click again the joystick to unselect this option. To change the player's name, you need to select the "Name" option by clicking on it, to set up every letter (by moving on the OY axis) and to move from one to another, you need to move the joystick on the OX axis (horizontally). After you finished, you have to click the joystick button to unselect it. To exit, you need to press the joytstick button on the "Exit" option.
 
 #### Info ####
 
