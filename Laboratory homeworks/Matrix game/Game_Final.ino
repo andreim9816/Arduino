@@ -147,6 +147,7 @@ int currColWelcomeMatrix = 0;
 unsigned long long timeHighscore = 0;
 unsigned long long lastTimeWelcomeMatrix = 0;
 
+// inital matrix that every level starts with
 const int matrixStart [widthMatrix][heightMatrix] = {
   {0, 0, 0, 1, 1, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0, 0},
@@ -158,6 +159,7 @@ const int matrixStart [widthMatrix][heightMatrix] = {
   {0, 0, 0, 1, 1, 0, 0, 0},
 };
 
+// the current matrix ( while i'm playing)
 int matrix[heightMatrix][widthMatrix]  = {
   {0, 0, 0, 1, 1, 0, 0, 0},
   {0, 0, 0, 0, 0, 0, 0, 0},
@@ -169,6 +171,7 @@ int matrix[heightMatrix][widthMatrix]  = {
   {0, 0, 0, 1, 1, 0, 0, 0},
 };
 
+// "START GAME" message that will be displayed on the matrix, while i'm scrolling through the menu
 const bool startGameMatrix[8][62] PROGMEM = {
   {0, 0, 0, 0, 0,   0, 0, 0, 0 ,   0,   0, 0, 0, 0 , 0,   0,   0, 0, 0, 0 ,   0,   0, 0, 0, 0 ,   0,  0, 0, 0,  0 , 0,  0, 0, 0, 0,   0, 0, 0, 0 ,   0,   0, 0, 0, 0  , 0,   0, 0, 0, 0    , 0,   0, 0, 0   , 0, 0, 0, 0, 0, 0, 0, 0, 0 },
   {0, 0, 0, 0, 0,   0, 1, 1, 1 ,   0,   1, 1, 1, 1 , 1,   0,   0, 1, 1, 0 ,   0,   1, 1, 1, 0 ,   0,  1, 1, 1,  1 , 1,  0, 0, 0, 0,   0, 1, 1, 0 ,   0,   0, 1, 1, 0  , 0,   1, 0, 0, 1    , 0,   1, 1, 1   , 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -180,27 +183,28 @@ const bool startGameMatrix[8][62] PROGMEM = {
   {0, 0, 0, 0, 0,   0, 0, 0, 0 ,   0,   0, 0, 0, 0 , 0,   0,   0, 0, 0, 0 ,   0,   0, 0, 0, 0 ,   0,  0, 0, 0,  0 , 0,  0, 0, 0, 0,   0, 0, 0, 0 ,   0,   0, 0, 0, 0  , 0,   0, 0, 0, 0    , 0,   0, 0, 0   , 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 };
 
+// "GAME OVER" message that is displayed on the matrix after the game is over
 const bool gameOverMatrix[8][54] PROGMEM = {
-  {0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0 , 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0 , 0, 0, 0, 0 , 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 1, 1, 0 , 0, 0, 1, 1, 0 , 0, 1, 0, 0, 1 , 0, 1, 1, 1 , 0, 0, 0, 0, 0, 1, 1, 0 , 0, 1, 0, 0, 1 , 0, 1, 1, 1 , 0, 1, 1, 1, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 1, 0, 0, 1 , 0, 1, 0, 0, 1 , 0, 1, 1, 1, 1 , 0, 1, 0, 0 , 0, 0, 0, 0, 1, 0, 0, 1 , 0, 1, 0, 0, 1 , 0, 1, 0, 0 , 0, 1, 0, 0, 1 , 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 1, 0, 0, 0 , 0, 1, 0, 0, 1 , 0, 1, 1, 1, 1 , 0, 1, 1, 1 , 0, 0, 0, 0, 1, 0, 0, 1 , 0, 1, 0, 0, 1 , 0, 1, 1, 1 , 0, 1, 0, 1, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 1, 0, 1, 1 , 0, 1, 1, 1, 1 , 0, 1, 0, 0, 1 , 0, 1, 0, 0 , 0, 0, 0, 0, 1, 0, 0, 1 , 0, 1, 0, 0, 1 , 0, 1, 0, 0 , 0, 1, 1, 1, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 1, 0, 0, 1 , 0, 1, 0, 0, 1 , 0, 1, 0, 0, 1 , 0, 1, 0, 0 , 0, 0, 0, 0, 1, 0, 0, 1 , 0, 1, 0, 0, 1 , 0, 1, 0, 0 , 0, 1, 0, 1, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 1, 1, 0 , 0, 1, 0, 0, 1 , 0, 1, 0, 0, 1 , 0, 1, 1, 1 , 0, 0, 0, 0, 0, 1, 1, 0 , 0, 0, 1, 1, 0 , 0, 1, 1, 1 , 0, 1, 0, 0, 1 , 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  {0, 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0 , 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0 , 0, 0, 0, 0 , 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  {0, 0, 0, 0, 0,   0, 0, 0, 0 ,  0,  0, 0, 0, 0 ,  0,  0, 0, 0, 0 ,  0,  0, 0, 0 ,  0, 0, 0, 0,  0, 0, 0, 0 ,  0,  0, 0, 0, 0 ,  0,  0, 0, 0 ,  0,  0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 1, 1, 0 ,  0,  0, 1, 1, 0 ,  0,  1, 0, 0, 1 ,  0,  1, 1, 1 ,  0, 0, 0, 0,  0, 1, 1, 0 ,  0,  1, 0, 0, 1 ,  0,  1, 1, 1 ,  0,  1, 1, 1, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   1, 0, 0, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 1, 1, 1 ,  0,  1, 0, 0 ,  0, 0, 0, 0,  1, 0, 0, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 0, 0 ,  0,  1, 0, 0, 1 ,  0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   1, 0, 0, 0 ,  0,  1, 0, 0, 1 ,  0,  1, 1, 1, 1 ,  0,  1, 1, 1 ,  0, 0, 0, 0,  1, 0, 0, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 1, 1 ,  0,  1, 0, 1, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   1, 0, 1, 1 ,  0,  1, 1, 1, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 0, 0 ,  0, 0, 0, 0,  1, 0, 0, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 0, 0 ,  0,  1, 1, 1, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   1, 0, 0, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 0, 0 ,  0, 0, 0, 0,  1, 0, 0, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 0, 0 ,  0,  1, 0, 1, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 1, 1, 0 ,  0,  1, 0, 0, 1 ,  0,  1, 0, 0, 1 ,  0,  1, 1, 1 ,  0, 0, 0, 0,  0, 1, 1, 0 ,  0,  0, 1, 1, 0 ,  0,  1, 1, 1 ,  0,  1, 0, 0, 1 ,  0, 0, 0, 0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 0, 0, 0 ,  0,  0, 0, 0, 0 ,  0,  0, 0, 0, 0 ,  0,  0, 0, 0 ,  0, 0, 0, 0,  0, 0, 0, 0 ,  0,  0, 0, 0, 0 ,  0,  0, 0, 0 ,  0,  0, 0, 0, 0 ,  0, 0, 0, 0, 0, 0, 0, 0, 0}
 };
 
-
+// "WELCOME" message that is displayed on the matrix after the Arduino is pluged in ( for about 5 seconds just to show the whole message).
 const bool welcomeMatrix[8][43] = {
-  {0, 0, 0, 0, 0,   0, 0, 0, 0, 0,  0, 0, 0, 0    , 0, 0, 0, 0  ,  0, 0, 0, 0    , 0, 0, 0, 0  , 0,  0, 0, 0, 0  , 0,  0, 0, 0, 0,  0, 0, 0 , 0, 0, 0, 0},
-  {0, 0, 0, 0, 0,   0, 1, 0, 1, 0,  1, 1, 1, 0    , 1, 0, 0, 0  ,  0, 1, 1, 0    , 0, 1, 1, 0  , 0,  1, 0, 0, 1  , 0,  1, 1, 1, 0,  0, 0, 1 , 0, 0, 0, 0},
-  {0, 0, 0, 0, 0,   0, 1, 0, 1, 0,  1, 0, 0, 0    , 1, 0, 0, 0  ,  1, 0, 0, 0    , 1, 0, 0, 1  , 0,  1, 1, 1, 1  , 0,  1, 0, 0, 0,  0, 0, 1 , 0, 0, 0, 0},
-  {0, 0, 0, 0, 0,   0, 1, 0, 1, 0,  1, 1, 1, 0    , 1, 0, 0, 0  ,  1, 0, 0, 0    , 1, 0, 0, 1  , 0,  1, 1, 1, 1  , 0,  1, 1, 1, 0,  0, 0, 1 , 0, 0, 0, 0},
-  {0, 0, 0, 0, 0,   0, 1, 1, 1, 0,  1, 0, 0, 0    , 1, 0, 0, 0  ,  1, 0, 0, 0    , 1, 0, 0, 1  , 0,  1, 0, 0, 1  , 0,  1, 0, 0, 0,  0, 0, 1 , 0, 0, 0, 0},
-  {0, 0, 0, 0, 0,   0, 1, 1, 1, 0,  1, 0, 0, 0    , 1, 0, 0, 0  ,  1, 0, 0, 0    , 1, 0, 0, 1  , 0,  1, 0, 0, 1  , 0,  1, 0, 0, 0,  0, 0, 0 , 0, 0, 0, 0},
-  {0, 0, 0, 0, 0,   0, 1, 0, 1, 0,  1, 1, 1, 0    , 1, 1, 1, 0  ,  0, 1, 1, 0    , 0, 1, 1, 0  , 0,  1, 0, 0, 1  , 0,  1, 1, 1, 0,  0, 0, 1 , 0, 0, 0, 0},
-  {0, 0, 0, 0, 0,   0, 0, 0, 0, 0,  0, 0, 0, 0    , 0, 0, 0, 0  ,  0, 0, 0, 0    , 0, 0, 0, 0  , 0,  0, 0, 0, 0  , 0,  0, 0, 0, 0,  0, 0, 0 , 0, 0, 0, 0}
+  {0, 0, 0, 0, 0,   0, 0, 0, 0 ,  0,  0, 0, 0,   0,   0, 0, 0, 0  ,  0, 0, 0, 0    , 0, 0, 0, 0  , 0,  0, 0, 0, 0  , 0,  0, 0, 0, 0,   0, 0, 0 , 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 1, 0, 1 ,  0,  1, 1, 1,   0,   1, 0, 0, 0  ,  0, 1, 1, 0    , 0, 1, 1, 0  , 0,  1, 0, 0, 1  , 0,  1, 1, 1, 0,   0, 0, 1 , 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 1, 0, 1 ,  0,  1, 0, 0,   0,   1, 0, 0, 0  ,  1, 0, 0, 0    , 1, 0, 0, 1  , 0,  1, 1, 1, 1  , 0,  1, 0, 0, 0,   0, 0, 1 , 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 1, 0, 1 ,  0,  1, 1, 1,   0,   1, 0, 0, 0  ,  1, 0, 0, 0    , 1, 0, 0, 1  , 0,  1, 1, 1, 1  , 0,  1, 1, 1, 0,   0, 0, 1 , 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 1, 1, 1 ,  0,  1, 0, 0,   0,   1, 0, 0, 0  ,  1, 0, 0, 0    , 1, 0, 0, 1  , 0,  1, 0, 0, 1  , 0,  1, 0, 0, 0,   0, 0, 1 , 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 1, 1, 1 ,  0,  1, 0, 0,   0,   1, 0, 0, 0  ,  1, 0, 0, 0    , 1, 0, 0, 1  , 0,  1, 0, 0, 1  , 0,  1, 0, 0, 0,   0, 0, 0 , 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 1, 0, 1 ,  0,  1, 1, 1,   0,   1, 1, 1, 0  ,  0, 1, 1, 0    , 0, 1, 1, 0  , 0,  1, 0, 0, 1  , 0,  1, 1, 1, 0,   0, 0, 1 , 0, 0, 0, 0},
+  {0, 0, 0, 0, 0,   0, 0, 0, 0 ,  0,  0, 0, 0,   0,   0, 0, 0, 0  ,  0, 0, 0, 0    , 0, 0, 0, 0  , 0,  0, 0, 0, 0  , 0,  0, 0, 0, 0,   0, 0, 0 , 0, 0, 0, 0}
 
 };
 
@@ -228,11 +232,7 @@ void setOptionSet(int position)
 
 }
 
-/* 
- * Function that updates the level every -- timeIncrementLevel -- miliseconds
- * and updates the speed of the ball, paddle and timeIncremenetLevel
-*/
-
+/*Function that updates the level every -- timeIncrementLevel -- miliseconds and updates the speed of the ball, paddle and timeIncremenetLevel */
 void updateLevel()
 {
   if (level >= 5)
@@ -278,8 +278,8 @@ void updateScore()
   score = score + level;
 }
 
-// function that updates the level using the Y axis
-void modifyLevel()
+/* Function that updates the level using the Y axis */
+void modifyLevel() 
 {
   if ( yValue > maxValue && joyMovedY == false)
   {
@@ -363,7 +363,7 @@ void displayMainMenuMessage()
 
   if (millis() - lastTimeStartGame >= 1500)
   {
-    delay(70);
+    delay(70); // delay so the message on the matrix will be easy to read
     currColMatrixStart++;
     lastTimeStartGame = millis();
   }
@@ -381,7 +381,7 @@ void displayGameOverMessage()
 
   if (millis() - lastTimeGameOver >= 100)
   {
-    delay(20);
+    delay(20); // delay so the message on the matrix can be easly read
     currColMatrixOver++;
     lastTimeGameOver = millis();
   }
@@ -414,7 +414,7 @@ void displayScreen()
       lcd.setCursor(11, 1);
       lcd.print("Info");
 
-      delay(1);
+      delay(1); // delay so the info on the lcd won't be blurred
 
       justStarted = true;
 
@@ -428,7 +428,7 @@ void displayScreen()
       break;
 
     case inGame:
-      if (justStarted == true) // if the game just begun, remember the time it started
+      if (justStarted == true) // if the game has just begun, remember the time it started
       {
         justStarted = false;
         firstTime = millis();
@@ -437,7 +437,7 @@ void displayScreen()
         changedMoveX = false;
         changedMoveY = false;
 
-        //init the matrix and the other variables;
+        //init the matrix 
         int row, col;
         for (row = 0 ; row < heightMatrix ; row++)
           for (col = 0 ; col < widthMatrix ; col++)
@@ -447,7 +447,7 @@ void displayScreen()
         posPaddleAI = widthMatrix / 2;
         posPaddle = widthMatrix / 2 ;
         
-        // init the position of th ball
+        // init the position of the ball
         posXBall = 4 ;
         posYBall = 4 ;
 
@@ -479,7 +479,7 @@ void displayScreen()
       lcd.setCursor(0, 1);
       lcd.print("Score:");
       lcd.print(score);
-      delay(10);
+      delay(10); // delay so the info on the lcd won't be blurred
 
       break;
 
@@ -494,7 +494,7 @@ void displayScreen()
 
       lcd.setCursor(11, 1);
       lcd.print(">Exit");
-      delay(1);
+      delay(1); //delay so the info on the lcd won't be blurred
 
       // if the button is pressed, then we go back to the Main Menu
       if (pressedButton == true)
@@ -525,7 +525,7 @@ void displayScreen()
       lcd.setCursor(1, 1);
       lcd.print("Name:");
       lcd.print(name);
-      // delay(10);
+      delay(3); // delay so the info on the lcd won't be blurred
 
       // When entering, set the position of the arrow on the first choice
       if (justStarted == true)
@@ -611,11 +611,17 @@ void displayScreen()
       lcd.print("   !!!");
       lcd.print(highscore);
       lcd.print(" !!!!");
-      delay(10);
+      delay(10); //delay so the info on the lcd won't be blurred
 
-      if (millis() - timeFinishedGame >= 5000) // after 5 secs, 2nd screen appears
+      /*
+            if (millis() - timeFinishedGame >= 5000) // after 5 secs, 2nd screen appears
+              selectedCategory = screen2;
+      */  
+      
+      // to advance to the next screen, you need to press the button
+      if(pressedButton == true)
         selectedCategory = screen2;
-
+   
       break;
 
     case screen1NoHighscore:
@@ -628,11 +634,15 @@ void displayScreen()
       lcd.setCursor(0, 1);
       lcd.print("Score was ");
       lcd.print(score);
-      delay(10);
+      delay(10); // delay so the info on the lcd won't be blurred
 
-      if (millis() - timeFinishedGame >= 5000) // after 5 secs, 2nd screen appears
+   /*   if (millis() - timeFinishedGame >= 5000) // after 5 secs, 2nd screen appears
+        selectedCategory = screen2; 
+   */
+
+   // to advance to the next screen, you need to press the button
+    if(pressedButton == true)
         selectedCategory = screen2;
-
       break;
 
     case screen2:
@@ -656,7 +666,7 @@ void displayScreen()
         lcd.print(">");
       }
 
-      delay(10);
+      delay(10); // delay so the info on the lcd won't be blurred
 
       // if the joystick is pressed, then it enters the selected category
       if (pressedButton == true)
@@ -690,17 +700,18 @@ void displayScreen()
         // if we exit to the main menu
         if (currOptionScreen2 == 0) // Exit
         {
+           strcpy(name, "AAAAAAAAAA");
           selectedCategory = mainMenu;
           currOption = 0;
-          strcpy(name, "AAAAAAAAAA");
           level = defaultLevel;
           startedLevel = defaultLevel;
           tryAgain = false;
         }
-        else if (currOptionScreen2 == 1) // Try again option
+        // Try again option
+        else if (currOptionScreen2 == 1) 
         {
           selectedCategory = inGame;
-          level = startedLevel; // the game starts at the same level the player set it last game
+          level = startedLevel; // the game starts at the same level the player set it last game, and with the same name
           tryAgain = true;
         }
 
@@ -714,7 +725,7 @@ void displayScreen()
 
 void readValues()
 {
-  // function that reads the values ( X and Y axis and whenever the button is pressed) and does some of the job too
+  // function that reads the values ( X and Y axis and whenever the button is pressed) and does some of the job, too
   pressedButton = false;
 
   swState = digitalRead(pinSW);
@@ -968,7 +979,7 @@ void moveBall()
   }
 }
 
-// if the ball is about to hit a paddle
+/* If the ball is about to hit a paddle */
 void ballHitSomething()
 {
   if (millis() - pinGreenTime >= 500 && pinGreenState == HIGH)
@@ -976,7 +987,6 @@ void ballHitSomething()
     pinGreenState = LOW;
     digitalWrite(pinGreen, pinGreenState);
   }
-
 
   if (posXBall == 1) // if we about to hit the player's paddle
     if ( ( (posPaddle == (posYBall + moveYBall)) || ((posPaddle - 1) == (posYBall + moveYBall))) && changedMoveY == false)
@@ -1035,7 +1045,7 @@ void ballHitObstacle()
 {
   if (level >= levelFirstObstacle) // if there is at least one obstacle
     if (posXBall != 1 && posXBall != heightMatrix - 2) // to be sure we are not about to hit a paddle
-      if ( matrix[posXBall + moveXBall][posYBall + moveYBall] == 1 || ( posXBall == heightMatrix / 2) && posYBall + moveYBall <= 0 || ( level >= levelSecondObstacle && posXBall == heightMatrix / 2 - 1 && posYBall + moveYBall >= widthMatrix ) ) // if the ball will hit an obstacle
+      if ( matrix[posXBall + moveXBall][posYBall + moveYBall] == 1 || ( posXBall == heightMatrix / 2) && posYBall + moveYBall <= 0 || ( level >= levelSecondObstacle && posXBall == heightMatrix / 2 - 1 && posYBall + moveYBall >= widthMatrix ) ) // if the ball hits an obstacle
       {
 
         moveXBall = -moveXBall;
@@ -1075,7 +1085,7 @@ void roundOver()
   {
     lives--;
     lastTimeExtraLifeGenerated = millis();
-    tone(pinBuzzer, 50000); // the buzzer vibrates
+    tone(pinBuzzer, 10000); // the buzzer vibrates
 
     // for 3 seconds, the matrix freezes, the red led is turned on and the buzzer virbates
     if (lives != 0)
@@ -1122,6 +1132,7 @@ void roundOver()
   }
 }
 
+/* Function that returns true if the game is over (i.e. player ran out of lives) */
 bool GameOver()
 {
   if (lives == 0) // if the player ran out of lives, the game is over
@@ -1131,7 +1142,7 @@ bool GameOver()
 
 void generateExtraLife()
 {
-  /* Extra lives can be generated, randomly.
+  /*  Extra lives can be generated, randomly.
       When reached level 6, there will be a 1% chance for an extra life to be generated
       After you reach level 10, there is a 3% chance for an extra life to be geenrated, but AFTER THE LAST EXTRA LIFE WAS GENERATED
       After you reach level 14,there is a 5% chance for an extra life to be geenrated, but AFTER THE LAST EXTRA LIFE WAS GENERATED
@@ -1167,7 +1178,7 @@ void generateExtraLife()
   if (level >= 10 && level < 14  && secondLifeGenerated == false)
     if (millis() - lastTimeExtraLifeGenerated >= 11000)
     {
-      int randomNumber = random(0, 1001); // generates a random number
+      int randomNumber = random(0, 1000); // generates a random number
 
       if ( randomNumber >= 0 && randomNumber <= 29) // a new extra life is generated
       {
@@ -1193,7 +1204,7 @@ void generateExtraLife()
   if (level >= 14 && thirdLifeGenerated == false)
     if (millis() - lastTimeExtraLifeGenerated >= 11000)
     {
-      int randomNumber = random(0, 1001); // generates a random number
+      int randomNumber = random(0, 1000); // generates a random number
 
       if ( randomNumber >= 0 && randomNumber <= 49) // a new extra life is generated
       {
@@ -1238,7 +1249,7 @@ void displayMatrix()
     {
       if ( (matrix[row][col] == 3 || matrix[row][col] == -3) && ( (firstLifeGenerated || secondLifeGenerated || thirdLifeGenerated) == true) ) // if it's an extra life on the current position, it will be blinking 
       {
-        if (millis() - lastTimeExtraLifeDisplayed >= 30)
+        if (millis() - lastTimeExtraLifeDisplayed >= 30) // changes it's state every 30 ms
         {
           lc.setLed(0, row, col, matrix[row][col] > 0 ? 1 : 0);
           matrix[row][col] = -matrix[row][col];
@@ -1286,8 +1297,8 @@ void setup()
 
   pinMode(pinSW, INPUT_PULLUP);
 
-  //EEPROM.put(eePromAddress , 0);
-  //EEPROM.put(eePromAddress + sizeof(highscore), "UNKNOWN");
+//  EEPROM.put(eePromAddress , 0);
+//  EEPROM.put(eePromAddress + sizeof(highscore), "UNKNOWN");
 
   EEPROM.get(eePromAddress , highscore);
   EEPROM.get(eePromAddress + sizeof(int) , namehighscore);
@@ -1308,10 +1319,10 @@ void displayWelcomeMessage()
 
     if (millis() - lastTimeWelcomeMatrix >= 1000)
     {
-      delay(80);
+      delay(80); // delay so the message on the matrix will be easy to read  
       currColWelcomeMatrix++;
 
-      if (millis() >= 4500)
+      if (millis() >= 4500) // after 4.5 seconds, the "Welcome" message has been displayed on the matrix and you can enter on the Menu
         welcomeMessageDisplayed = true;
 
       lastTimeWelcomeMatrix = millis();
@@ -1335,6 +1346,4 @@ void loop()
     lcd.setCursor(0, 1);
     lcd.print("Pong game.Enjoy!");
   }
-
-
 }
