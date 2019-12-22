@@ -23,8 +23,10 @@ Pong is a two-dimensional sports game that simulates table tennis. The player co
 
 <br>
 <br>
+
 **Schematics of the circuit**
-![Circuit schematics](images/schematics.jpeg)
+
+![Circuit schematics](images/schematics.png)
 
 <br>
 <br>
