@@ -889,7 +889,7 @@ void movePaddle()
       timePressedX = millis();
       matrix[0][posPaddle] = matrix[0][posPaddle - 1] = 0;
 
-      posPaddle --;
+      posPaddle--;
       if (posPaddle == 0)
         posPaddle = 1 ;
 
@@ -1153,10 +1153,12 @@ void generateExtraLife()
     {
       int randomNumber = random(0, 1000); // generates a random number
 
-      if ( randomNumber >= 0 && randomNumber <= 9) // a new extra life is generated
+      if (randomNumber <= 9) // a new extra life is generated
       {
         lastTimeExtraLifeGenerated = millis();
         firstLifeGenerated = true;
+        
+        // little while that searches for an empty spot for the extra life. Harmless for the code
         do
         {
           randomRow = random(2, heightMatrix - 2);
