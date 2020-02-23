@@ -24,22 +24,23 @@ const int trigPinCenter = 9;
 const int echoPinCenter = A3;
 
 // speeds when turning
-const int speedTurnLeft = 240;
-const int speedTurnRight = 240;
+const int speedTurnLeft = 200;
+const int speedTurnRight = 200;
 
 
 // thresholds for the sensors
 const int distanceRightThreshold = 25;
-const int distanceCenterThreshold = 10;
+const int distanceCenterThreshold = 13;
 const int distanceLeftThreshold = 25;
 
 const int speedLeftForward = 120;
-const int speedRightForward = 115;
+const int speedRightForward = 109;
 
 // pins for the leds
 const int pinBlue = 12;
-const int pinGreen = 13;
+const int pinGreen = A4;
 
+bool carStop = true; // so the car will be stopped
 
 // disances for left, right and center sensor
 float distanceLeft;
@@ -49,11 +50,11 @@ float distanceCenter;
 // constants for the PID control
 float error , lastError;
 float derivative;
-int offset = 7; // distance for the rightWall
+int offset = 8; // distance for the rightWall
 int integral;
 
 // constans for the PID control
-int Turn , Kp = 8, Ki = 0, Kd = 2;
+int turn , Kp = 6, Ki = 0, Kd = 4;
 float speedCorrection;
 
 // the spped of each wheel
@@ -92,7 +93,6 @@ void setup()
 
 void readIR()
 {
-  Serial.println(results.value);
   if (irrecv.decode(&results)){
     if (results.value == 0XFFFFFFFF)
       results.value = keyValue;
@@ -102,21 +102,15 @@ void readIR()
       
     case 0xFFC23D:
       stopCar();
-      Serial.println(">|"); //STOP
+      Serial.println(">|"); //stop
       break;
-   /*
-
-      case 0xFFE01F:
-      turnLeft();
-      Serial.println("-"); // left
-    break ;
- 
-    case 0xFFA857:
-      turnRight();
-      Serial.println("+"); // right
+   
+    case 0xFF02FD:
+      carStop = false;
+      Serial.println(">>|"); // start
     break ;
     
-    */
+  
    }
    
     keyValue = results.value;
@@ -124,11 +118,9 @@ void readIR()
     }
 }
 
-bool carStop = false; // so the car will be stopped
-
 void stopCar()
 {
-  carStop = true;
+   carStop = true;
 
    analogWrite(enablePinRight , 0 );
    digitalWrite(rightFw , LOW);
@@ -158,6 +150,7 @@ void readSensor(const int trigPin , const int echoPin , float &distance)
   distance = duration * 0.034 / 2;
 }
 
+unsigned long timeCorrection = 0;
 
 void forward()
 { 
@@ -170,9 +163,29 @@ void forward()
    
    speedCorrection = Kp * error + Ki * integral + Kd * derivative;
 
-   leftWheelSpeed = 130 + speedCorrection;
-   rightWheelSpeed = 140 - speedCorrection;
+    leftWheelSpeed = 130 + speedCorrection; // 130
+    rightWheelSpeed = 125 - speedCorrection; // 140
+/*
+   if(distanceRight  < offset)
+   {
+    if(millis() - timeCorrection > 900)
+    {
+        leftWheelSpeed = 100 + speedCorrection; // 130
+        rightWheelSpeed = 120 - speedCorrection; // 140
+        timeCorrection = millis();
+    }
+   }
 
+   else
+   {
+     if(millis() - timeCorrection > 900)
+    {
+        leftWheelSpeed = 120 + speedCorrection;
+        rightWheelSpeed = 100 - speedCorrection;
+        timeCorrection = millis();
+    }
+   }
+*/  
   /*  if(error > 0)
    {
       /*if(rightWheelSpeed < 60) rightWheelSpeed += 30;
@@ -194,14 +207,14 @@ void forward()
    Serial.print(error);
    
    Serial.print(" turn = ");
-   Serial.print(Turn);
+   Serial.print(turn);
   
   
    analogWrite(enablePinLeft , leftWheelSpeed);
    digitalWrite(leftFw , HIGH);
    digitalWrite(leftBk , LOW); 
   
-   analogWrite(enablePinRight , rightWheelSpeed );
+   analogWrite(enablePinRight , rightWheelSpeed);
    digitalWrite(rightFw , HIGH);
    digitalWrite(rightBk , LOW);
   
@@ -215,9 +228,9 @@ void forward()
 }
 
 unsigned long long lastTimeTurn = 0;
-const int noTurn = 2700; // minimum time is needed between turns
+const int noTurn = 2700; // minimum time needed between turns
 const int timeRight = 850; // time for turning right
-const int timeLeft = 810; // time for turning left
+const int timeLeft = 850; // time for turning left
 const int timeUturn = 1750; // time for 180 turn
 
 void turnRight()
@@ -238,12 +251,38 @@ void turnRight()
   unsigned long time = millis();
 
   // for <<timeRight> ms, the led will blink and the car is turning right
-  
   while(millis() - time < timeRight)
   {
+    digitalWrite(pinBlue, HIGH);
+    readIR();
+  }
+  
+  /*
+  while(distanceLeft < 15)
+  {
+    readSensor(trigPinLeft , echoPinLeft , distanceLeft);
     digitalWrite(pinBlue , HIGH);
   }
 
+  unsigned long prev = 0;
+  unsigned long S = 10000;
+
+  do
+  {
+    prev = S;
+    S = 0;
+    for(int i = 0 ; i < 10 ; i++)
+    {
+      S += distanceLeft;
+      readSensor(trigPinLeft , echoPinLeft , distanceLeft);
+   //   delay(5);
+    }
+
+    S = S / 10;
+  }while(prev > S);
+
+  */
+  
   digitalWrite(pinBlue , LOW);
   
   // stop the motors
@@ -264,8 +303,6 @@ void turn180()
 {
   leftWheelSpeed = speedTurnLeft;
   rightWheelSpeed = speedTurnRight;
-
-  Serial.println(millis());
   
   analogWrite(enablePinLeft , leftWheelSpeed);
   digitalWrite(leftFw , LOW);
@@ -276,7 +313,13 @@ void turn180()
   digitalWrite(rightBk , LOW);
 
   // for <<timeUturn>> ms, the car will make a U-turn
-  delay(timeUturn);
+  
+  unsigned long time = millis();
+  while(millis() - time < timeUturn)
+  {
+    readIR();
+  }
+  
 
   // stop the motors
   
@@ -313,6 +356,7 @@ void turnLeft()
   while(millis() - time < timeLeft)
   {
     digitalWrite(pinGreen, HIGH);
+    readIR();
   }
 
   digitalWrite(pinGreen , LOW);
@@ -347,9 +391,9 @@ void maze()
   }
   else */
   
-  if(distanceRight > distanceRightThreshold && millis() - lastTimeTurn > noTurn)
+  if(distanceRight > distanceRightThreshold && millis() - lastTimeTurn > noTurn) // the car goes to the right if it can
         turnRight();
-  else if(millis() - lastTimeTurn < noTurn && distanceCenter > distanceCenterThreshold)
+  else if(millis() - lastTimeTurn < noTurn && distanceCenter > distanceCenterThreshold) // if the car just made a turn, then it has to wait until the next turn, so it just goes forward ( if it can)
   {
     analogWrite(enablePinLeft , speedLeftForward);
     digitalWrite(leftFw , HIGH);
@@ -359,11 +403,11 @@ void maze()
     digitalWrite(rightFw , HIGH);
     digitalWrite(rightBk , LOW);
   }
-  else if(distanceCenter > distanceCenterThreshold)
+  else if(distanceCenter > distanceCenterThreshold) // if there is no space on the right, it goes forward, using the PID
         forward();
-  else if(distanceLeft > distanceLeftThreshold && millis() - lastTimeTurn > noTurn)
+  else if(distanceLeft > distanceLeftThreshold && millis() - lastTimeTurn > noTurn) // goes to the left if it is the only option
         turnLeft();
-  else if(distanceRight < distanceRightThreshold && distanceLeft < distanceLeftThreshold && distanceCenter < distanceCenterThreshold)
+  else if(distanceRight < distanceRightThreshold && distanceLeft < distanceLeftThreshold && distanceCenter < distanceCenterThreshold) // if it is blocked, then it makes a U-turn
         turn180();
 }
 
@@ -393,13 +437,15 @@ void maze()
 void loop()
 {
   // the car works as long as it is not stopped by the remote, when it finishes
+
+  readIR();
   
   if(carStop == false)
   {
     readSensor(trigPinCenter , echoPinCenter , distanceCenter);
     readSensor(trigPinLeft , echoPinLeft , distanceLeft);
     readSensor(trigPinRight , echoPinRight , distanceRight); 
-    readIR();
+    maze();
     
     Serial.print("Left: ");
     Serial.print(distanceLeft);
@@ -410,8 +456,6 @@ void loop()
     Serial.print("      Right: ");
     Serial.println(distanceRight);
   
-     maze();
-
   }
   else 
   {
