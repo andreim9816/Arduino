@@ -53,7 +53,10 @@ The motors of the car are turned on/off by the IR remote. To power it, you need 
 
 **Ultrasonic sensors**
 
-To establish the position of the car in the maze(how much space is on the left, right, or in front of it), we used 3 ultrasonic sensors to measure the distance. ![](images/hc-sr04.png). We then calculate the distance, using the speed of the sound and the time measured by the sensor.
+To establish the position of the car in the maze(how much space is on the left, right, or in front of it), we used 3 ultrasonic sensors to measure the distance. We then calculate the distance, using the speed of the sound and the time measured by the sensor. ![](images/hc-sr04.png)
+
+**PID control**
+When the car is moving forward, to ensure that is going straight, or if it is too close to one of the walls, to redress it so as the distances between the car and the two walls are almost equal, we used the **PID control**.
 
 
 
