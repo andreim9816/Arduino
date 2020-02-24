@@ -45,7 +45,13 @@ Maze solver robot that must find its way through a labyrinth. The algorithm moni
 
 The motors of the car are turned on/off by the IR remote. To power it, you need to press the **>>|** button, and to stop it, the **">|"** button. Once the motors are powered up, the car started to move. There are 3 main cases in which the car behaves:
 
-1. There is a new path on the right side of the car. Then, no matter it the car can 
+1. There is a new path on the right side of the car. Then, no matter if the car could still go forward or on the left, it chooses to make a 90° rotation to the right and continues to go forward until a new case is met.
+1. There is a new path on the left. Here, there are another 2 cases:
+   1. The car can still go forward. Then, it chooses to go forward
+   1. The car can't go forward. Basically, the only possible way it to make a 90° rotation to the left.
+1. The car is blocked (can't go to the left, right or front). In this case, it makes a 180° rotation and starts to go forward.
+
+
 
 
 
