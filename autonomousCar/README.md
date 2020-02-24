@@ -41,10 +41,18 @@ Maze solver robot that must find its way through a labyrinth. The algorithm moni
 
 <br>
 
-### Instructions / features ###
+## Instructions / features ##
 
-The motors of the car are turned on/off by the IR remote. To power it, you need to press the **>>|** button, and to stop it, the **">|"** button. Once the motors are powered up, the car started to move. There are 3 main cases in which the car behaves:
+<br>
 
+### Turn on / off ###
+
+The motors of the car are turned on/off by the IR remote. To power it, you need to press the **>>|** button, and to stop it, the **">|"** button. Once the motors are powered up, the car started to move. 
+
+### Moving through the maze ###
+
+Once the car is turned of, there are 3 main cases in which the car behaves:
+<br>
 1. There is a new path on the right side of the car. Then, no matter if the car could still go forward or on the left, it chooses to make a 90° rotation to the right and continues to go forward until a new case is met.
 1. There is a new path on the left. Here, there are another 2 cases:
    1. The car can still go forward. Then, it chooses to go forward
@@ -58,6 +66,7 @@ To establish the position of the car in the maze(how much space is on the left, 
 ### PID control ###
 When the car is moving forward, to ensure that is going straight, or if it is too close to one of the walls, to redress it so as the distances between the car and the two walls are almost equal, we used the **PID control**. PID (proportional integral derivative) controllers use a control loop feedback mechanism to control process variables as close to the target or setpoint output as possible. 
 ![](images/pid-controller.png)
+
 
 
 
