@@ -36,12 +36,12 @@ Maze solver robot that must find its way through a labyrinth. The algorithm moni
 
 <br>
 
-**Demo video** 
+**Demo video**
 [click here](https://)
 
 <br>
 
-**Instructions / features**
+### Instructions / features ###
 
 The motors of the car are turned on/off by the IR remote. To power it, you need to press the **>>|** button, and to stop it, the **">|"** button. Once the motors are powered up, the car started to move. There are 3 main cases in which the car behaves:
 
@@ -51,11 +51,11 @@ The motors of the car are turned on/off by the IR remote. To power it, you need 
    1. The car can't go forward. Basically, the only possible way it to make a 90° rotation to the left.
 1. The car is blocked (can't go to the left, right or front). In this case, it makes a 180° rotation and starts to go forward.
 
-####Ultrasonic sensors####
+### Ultrasonic sensors ###
 
 To establish the position of the car in the maze(how much space is on the left, right, or in front of it), we used 3 ultrasonic sensors to measure the distance. We then calculate the distance, using the speed of the sound and the time measured by the sensor. ![](images/hc-sr04.png)
 
-####PID control####
+### PID control ###
 When the car is moving forward, to ensure that is going straight, or if it is too close to one of the walls, to redress it so as the distances between the car and the two walls are almost equal, we used the **PID control**. It stands for 
 
 
