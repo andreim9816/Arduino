@@ -17,11 +17,11 @@ Maze solver robot that must find its way through a labyrinth. The algorithm moni
 1. 2x Led (green and blue)
 1. 2x Wheel
 1. Caster Wheel
-1. 4 x AAA Battery Holder
+1. 4x AAA Battery Holder
 1. 4x AAA battery
 1. 9V battery
 
-[Click here of the link](https://docs.google.com/spreadsheets/d/1Htry010sDG5Vxl1XxuDkIDsEU6a6pIBbHVVmY9l-o_E/edit#gid=253948986)
+[Click here for the BOM link](https://docs.google.com/spreadsheets/d/1Htry010sDG5Vxl1XxuDkIDsEU6a6pIBbHVVmY9l-o_E/edit#gid=253948986)
 
 <br>
 
@@ -51,6 +51,9 @@ The motors of the car are turned on/off by the IR remote. To power it, you need 
    1. The car can't go forward. Basically, the only possible way it to make a 90° rotation to the left.
 1. The car is blocked (can't go to the left, right or front). In this case, it makes a 180° rotation and starts to go forward.
 
+**Ultrasonic sensors**
+
+To establish the position of the car in the maze(how much space is on the left, right, or in front of it), we used 3 ultrasonic sensors to measure the distance. ![](images/hc-sr04.png). We then calculate the distance, using the speed of the sound and the time measured by the sensor.
 
 
 
