@@ -34,7 +34,7 @@ const int distanceCenterThreshold = 13;
 const int distanceLeftThreshold = 25;
 
 const int speedLeftForward = 120;
-const int speedRightForward = 109;
+const int speedRightForward = 115;
 
 // pins for the leds
 const int pinBlue = 12;
@@ -230,8 +230,8 @@ void forward()
 unsigned long long lastTimeTurn = 0;
 const int noTurn = 2700; // minimum time needed between turns
 const int timeRight = 850; // time for turning right
-const int timeLeft = 850; // time for turning left
-const int timeUturn = 1750; // time for 180 turn
+const int timeLeft = 800 ; // time for turning left
+const int timeUturn = 1630; // time for 180 turn
 
 void turnRight()
 {
