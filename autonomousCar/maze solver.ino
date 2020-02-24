@@ -151,6 +151,8 @@ void readSensor(const int trigPin , const int echoPin , float &distance)
 }
 
 unsigned long timeCorrection = 0;
+const int leftSpeed = 130;
+const int rightSpeed = 125;
 
 void forward()
 { 
@@ -163,8 +165,8 @@ void forward()
    
    speedCorrection = Kp * error + Ki * integral + Kd * derivative;
 
-    leftWheelSpeed = 130 + speedCorrection; // 130
-    rightWheelSpeed = 125 - speedCorrection; // 140
+    leftWheelSpeed = leftSpeed + speedCorrection; // 130
+    rightWheelSpeed = rightSpeed - speedCorrection; // 140
 /*
    if(distanceRight  < offset)
    {
