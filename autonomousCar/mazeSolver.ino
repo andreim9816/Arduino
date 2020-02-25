@@ -51,7 +51,7 @@ const int timeUturn = 1630; // time for 180 turn
 const int pinBlue = 12;
 const int pinGreen = A4;
 
-// variable describing motors state
+// variable describing the motors' state
 bool carStop = true; 
 
 // disances for left, right and center sensor
