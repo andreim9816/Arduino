@@ -32,7 +32,10 @@ Maze solver robot that must find its way through a labyrinth. The algorithm moni
 
 <br>
 
-**Schematics for the car**
+## Schematics for the car ##
+
+<br>
+
 ![](images/Fritzing scheme_bb.jpg)
 
 <br>
