@@ -36,7 +36,7 @@ Maze solver robot that must find its way through a labyrinth. The algorithm moni
 
 <br>
 
-![](images/Fritzing scheme_bb.jpg)
+![](images/Frtizing_scheme.jpg)
 
 <br>
 
