@@ -26,13 +26,14 @@ Maze solver robot that must find its way through a labyrinth. The algorithm moni
 <br>
 
 **Photo of the entire project**
-// de inserat poza
+![](images/front_car.jpg)
+![](images/right_car.jpg)
+![](images/left_car.jpg)
 
 <br>
 
 **Schematics for the car**
-
-// de facut schema fritzing
+![](images/Fritzing scheme_bb.jpg)
 
 <br>
 
