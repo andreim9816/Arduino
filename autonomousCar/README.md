@@ -9,6 +9,8 @@ Maze solver robot that must find its way through a labyrinth. The algorithm moni
 1. 2x Breadboard
 1. Wires
 1. 20cm x 15cm plastic board (the support of the car)
+1. 3x 9cm x 20cm cardboard (left,right and top walls of the car)
+1. 2x 9cm x 15cm cardboare (front and back walls of the car)
 1. 2x DC motor
 1. IR receiver
 1. L293D driver
@@ -73,12 +75,3 @@ When the car is moving forward, to ensure that is going straight, or if it is to
 ### Turning left / right ###
 
 When the car decides to make a 90° rotation, the corresponding led will blink. When the car makes a left-turn, then the green one blinks, otherwise, the blue one blinks.
-
-
-
-
-
-
-
-
-
