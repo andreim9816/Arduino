@@ -1,6 +1,6 @@
 # Maze solver
 
-Maze solver robot that must find its way through a labyrinth. The algorithm monitoring the wall is one of the most popular algorithms for finding a way out of the maze, and is also known as the "Rule of the right hand". If the maze of connections, or if all its walls are connected to each other, then if the robot is inside the maze, backing to one side of the wall during the entire passage through the maze, there is a guaranteed way out of the maze, otherwise the robot would be returned to the entrance of the labyrinth and thereby make the rounds of each path in the maze at least once. The task is to go through the entire robot labyrinth and successfully complete it. Therefore, the robot passes through some mazes automatically (independently), and through some software (known in advance maze)
+Maze solver robot that must find its way through a labyrinth. The algorithm monitoring the wall is one of the most popular algorithms for finding a way out of the maze, and is also known as the "Rule of the right hand". If the maze of connections, or if all its walls are connected to each other, then if the robot is inside the maze, backing to one side of the wall during the entire passage through the maze, there is a guaranteed way out of the maze, otherwise the robot would be returned to the entrance of the labyrinth and thereby make the rounds of each path in the maze at least once. The task is to go through the entire robot labyrinth and successfully complete it.
 
 ### Hardware / BOM ###
 <br>
